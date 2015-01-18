@@ -1,0 +1,8 @@
+@import "normalize.css";
+@import "suitcss-base";
+
+.Avatar {
+  height: 100px;
+  width: 100px;
+  /*border-radius: 100%;*/
+}
