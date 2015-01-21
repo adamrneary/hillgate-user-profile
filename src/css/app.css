@@ -238,6 +238,23 @@ h1 {
   padding: 0.25em;
   margin: 2px 5px;
   font-size: 0.85em;
+
+}
+
+.EducationHistory {
+  padding-bottom: 1em;
+}
+.EducationHistory--School {
+  font-family: Equity;
+  font-size: 1.2rem;
+}
+.EducationHistory--Degree {
+  font-weight: 600;
+  color: var(--u-color-metric-light);
+}
+.EducationHistory--Year {
+  float: right;
+  color: var(--u-color-metric-dark);
 }
 
 .Footer {
@@ -264,7 +281,7 @@ h1 {
 
 
 .progress-meter .background {
-  fill: var(--u-color-metric-dark);;
+  fill: var(--u-color-metric-dark);
 }
 .progress-meter  .foreground {
   fill: var(--u-color-white);
