@@ -13,6 +13,7 @@ var suitcss = require('gulp-suitcss');
 // js
 var watchify = require('watchify');
 var browserify = require('browserify');
+var coffeeify = require('coffeeify');
 var reactify = require('reactify');
 var sourcemaps = require('gulp-sourcemaps');
 
@@ -32,10 +33,11 @@ var paths = {
 paths.static = [
   join(paths.src, '**/*'),
   join('!', paths.src, '**/*.css'),
-  join('!', paths.src, '**/*.js')
+  join('!', paths.src, '**/*.js'),
+  join('!', paths.src, '**/*.coffee')
 ]
 paths.css = join(paths.src, 'css/*.css');
-paths.js = join(paths.src, 'js/app.js');
+paths.js = join(paths.src, 'js/app.coffee');
 
 var bundleCache = {};
 var pkgCache = {};
@@ -70,29 +72,30 @@ gulp.task('dev:css', function(){
     .pipe(liveReload());
 });
 
-// var appBundler = watchify(
-//   browserify(paths.js, {
-//     cache: bundleCache,
-//     packageCache: pkgCache,
-//     fullPaths: true,
-//     standalone: 'demo',
-//     debug: true
-//   })
-// );
-// appBundler.transform(reactify);
+var appBundler = watchify(
+  browserify({
+    entries: "./" + paths.js,
+    cache: bundleCache,
+    packageCache: pkgCache,
+    fullPaths: true,
+    standalone: 'demo',
+    debug: true
+  })
+);
+appBundler.transform(coffeeify);
 // appBundler.exclude('jquery');
 //
-// gulp.task('dev:js', function(){
-//   return appBundler.bundle()
-//     // browserify -> gulp transfer
-//     .pipe(gulp.src('app.js'))
-//     // .pipe(buffer())
-//     .pipe(cached('app-js'))
-//     .pipe(sourcemaps.init({loadMaps: true}))
-//     .pipe(sourcemaps.write('.'))
-//     .pipe(gulp.dest(join(paths.tmp, 'js/')))
-//     .pipe(liveReload());
-// });
+gulp.task('dev:js', function(){
+  return appBundler.bundle()
+    // browserify -> gulp transfer
+    .pipe(gulp.src('app.js'))
+    // .pipe(buffer())
+    .pipe(cached('app-js'))
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(join(paths.tmp, 'js/')))
+    .pipe(liveReload());
+});
 
 gulp.task("dev", function(callback) {
   return runSequence(

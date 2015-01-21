@@ -1,8 +1,239 @@
 @import "normalize.css";
+@import "adamrneary-base-css/css/concourse";
+@import "adamrneary-base-css/css/equity";
 @import "suitcss-base";
+@import "suitcss-components-button";
+@import "suitcss-components-grid";
+@import "suitcss-utils-size";
 
+:root {
+  --u-color-white: #fff;
+  --u-color-not-white: #f7f7f7;
+  --u-color-light-grey: rgb(215, 215, 215);
+  --u-color-base-text: rgb(85, 85, 85);
+  --u-color-brand: rgb(66, 93, 135);
+  --u-color-metric: #737DA3;
+  --u-color-metric-light: #ACB4DC;
+  --u-color-metric-dark: #454C63;
+
+  --u-font-sans-serif: Concourse;
+  --u-font-serif: Equity;
+  --Excerpt-highlight-color: orange;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 100%;
+  font-family: var(--u-font-sans-serif);
+  color: var(--u-color-base-text);
+  background-color: var(--u-color-metric-dark);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--u-font-serif);
+  font-weight: 100;
+}
+h1 {
+  font-size: 2.7em;
+}
+
+
+.u-container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.u-light {
+  background-color: var(--u-color-not-white);
+}
+.u-dark {
+  background-color: var(--u-color-metric);
+  border-top: 1px solid var(--u-color-brand);
+  height: 900px;
+}
+
+
+.Sidebar {
+  color: var(--u-color-white);
+}
+.Brand {
+  height: 60px;
+  padding: 1.2em;
+  border-bottom: 1px solid var(--u-color-metric);
+  font-family: Equity;
+  font-weight: 100;
+}
+
+.AppHeader {
+  background-color: var(--u-color-not-white);
+  border-bottom: 1px solid var(--u-color-light-grey);
+}
+.Breadcrumb {
+  float: left;
+  margin-right: 1em;
+  padding: 1.2em;
+  height: 60px;
+  border-right: 1px solid var(--u-color-light-grey);
+}
+.UserSelect {
+  float: right;
+  margin-left: 1em;
+  padding: 14px 13px 10px 15px;
+  height: 60px;
+  border-left: 1px solid var(--u-color-metric-dark);
+  background-color: var(--u-color-metric-dark);
+}
+.SearchBox {
+  padding: 1.2em 0;
+  height: 60px;
+  width: 100%;
+}
+.SearchInput {
+  background-color: transparent;
+  border: none;
+  padding: 0 1em;
+  width: 30em;
+}
+
+
+.UserProfileHeader {
+  padding: 3em 0 3em;
+}
 .Avatar {
   height: 100px;
   width: 100px;
-  /*border-radius: 100%;*/
+  border-radius: 100%;
+  float: left;
+  margin-right: 2em;
+  border: 2px solid var(--u-color-metric);
+}
+.Avatar-small {
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
+}
+.UserHeaderText {
+  padding-top: 8px;
+  font-weight: 300;
+}
+.UserActionButtons {
+  padding-top: 25px;
+  float: right;
+}
+.UserActionButtons a {
+  padding: 1em;
+  margin-right: 1em;
+  border-radius: 100px;
+  border: 2px solid var(--u-color-metric);
+}
+.Button {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  background-color: var(--u-color-white);
+}
+
+
+/* Vertical Nav
+*/
+.Nav--Nav-Vertical {
+  padding: 1.2em 0;
+  border-bottom: 1px solid var(--u-color-metric);
+}
+.Nav--Nav-Vertical span {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--u-color-metric);
+  padding: 1em;
+}
+.Nav--Nav-Vertical li {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.8rem;
+  padding: .5em 1.2em;
+}
+.Nav--Nav-Vertical li.ui-state-active {
+  border-left: 4px solid var(--u-color-white);
+  padding-left: calc(1em-4px);
+}
+.Nav--Nav-Vertical li.ui-state-active i {
+  color: var(--u-color-white);
+  font-weight: normal;
+  margin-left: -4px;
+}
+.Nav--Nav-Vertical li.ui-state-active a {
+  color: var(--u-color-white);
+  font-weight: normal;
+}
+.Nav--Nav-Vertical i {
+  padding-right: 1em;
+}
+.Nav--Nav-Vertical a, .Nav--Nav-Vertical i {
+  text-decoration: none;
+  color: var(--u-color-metric-light);
+}
+.Nav--Nav-Vertical img.Avatar-small {
+  position: relative;
+  top: 11px;
+  margin-right: 7px;
+}
+
+/* Horizontal Nav
+*/
+.Nav--Nav-Horizontal li {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.9rem;
+  margin-right: 2.5em;
+  padding: 1em 0;
+}
+.Nav--Nav-Horizontal li.ui-state-active {
+  border-bottom: 4px solid var(--u-color-metric-dark);
+}
+.Nav--Nav-Horizontal li.ui-state-active a {
+  color: var(--u-color-base-text);
+  font-weight: 600;
+}
+.Nav--Nav-Horizontal a {
+  text-decoration: none;
+  color: var(--u-color-brand);
+}
+
+.Metric {
+  color: var(--u-color-white);
+  border-right: 1px solid var(--u-color-metric-light);
+  border-bottom: 1px solid var(--u-color-metric-light);
+  padding: 1em;
+  height: 12em;
+}
+.Metric--value {
+  font-size: 4em;
+  font-family: var(--u-font-serif);
+}
+.Metric--track {
+  width: 100%;
+  height: 2px;
+  background-color: var(--u-color-metric-dark);
+}
+.Metric--line {
+  height: 2px;
+  background-color: var(--u-color-white);
+}
+.Metric--bars {
+  background-color: var(--u-color-metric-light);
+  color: var(--u-color-metric-dark);
+  text-align: right;
+  padding: 0.25em;
+  margin: 2px 0;
+  font-size: 0.85em;
+}
+.Metric--barLabels {
+  text-align: right;
+  text-transform: uppercase;
+  padding: 0.25em;
+  margin: 2px 5px;
+  font-size: 0.85em;
 }
