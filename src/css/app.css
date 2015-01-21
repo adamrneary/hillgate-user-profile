@@ -258,3 +258,26 @@ h1 {
   text-decoration: none;
   color: var(--u-color-brand);
 }
+
+
+
+
+
+.progress-meter .background {
+  fill: var(--u-color-metric-dark);;
+}
+.progress-meter  .foreground {
+  fill: var(--u-color-white);
+}
+
+.progress-meter text {
+  font-family: var(--u-font-serif);
+  font-size: 4em;
+  color: var(--u-color-white);
+}
+
+.progress-meter .text2 {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.8rem;
+}
