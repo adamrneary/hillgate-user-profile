@@ -108,12 +108,13 @@ h1 {
   border-radius: 100%;
   float: left;
   margin-right: 2em;
-  border: 2px solid var(--u-color-metric);
+  border: 3px solid var(--u-color-metric-dark);
 }
 .Avatar-small {
   height: 32px;
   width: 32px;
   border-radius: 100%;
+  border: 1px solid var(--u-color-metric-dark);
 }
 .UserHeaderText {
   padding-top: 8px;
