@@ -50,7 +50,7 @@ h1 {
 .u-dark {
   background-color: var(--u-color-metric);
   border-top: 1px solid var(--u-color-brand);
-  height: 900px;
+  height: 600px;
 }
 
 
@@ -236,4 +236,23 @@ h1 {
   padding: 0.25em;
   margin: 2px 5px;
   font-size: 0.85em;
+}
+
+.Footer {
+  background-color: var(--u-color-not-white);
+  padding: 1.5em;
+}
+.Footer li {
+  display: inline-block;
+  margin-right: 1em;
+}
+.Footer span {
+  color: var(--u-color-base-text);
+}
+.Footer a {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--u-color-brand);
 }
