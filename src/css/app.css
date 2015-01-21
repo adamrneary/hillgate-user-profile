@@ -128,7 +128,7 @@ h1 {
   padding: 1em;
   margin-right: 1em;
   border-radius: 100px;
-  border: 2px solid var(--u-color-metric);
+  border: 2px solid var(--u-color-metric-dark);
 }
 .Button {
   text-transform: uppercase;
@@ -211,6 +211,7 @@ h1 {
   border-bottom: 1px solid var(--u-color-metric-light);
   padding: 1em;
   height: 12em;
+  position: relative;
 }
 .Metric--value {
   font-size: 4em;
@@ -243,19 +244,80 @@ h1 {
 }
 
 .EducationHistory {
-  padding-bottom: 1em;
+  position: relative;
+  margin: 0 0 1em 0.75em;
+  background-color: var(--u-color-not-white);
+  padding: 8px;
+  border: 2px solid var(--u-color-metric-dark);
 }
+
+/* Required for Down Triangle */
+.EducationHistory:before, .EducationHistory:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-left: 0;
+}
+
+/* Stroke */
+.EducationHistory:before {
+  left: -11px;
+  top: 5px;
+
+  /* If 1px darken stroke slightly */
+  border-right-color: var(--u-color-metric-dark);
+  border-width: 10px;
+}
+
+/* Fill */
+.EducationHistory:after {
+  left: -8px;
+  top: 5px;
+  border-right-color: var(--u-color-not-white);
+  border-width: 10px;
+}
+
 .EducationHistory--School {
-  font-family: Equity;
-  font-size: 1.2rem;
+  color: var(--u-color-base-text);
+  font-size: 0.9rem;
 }
 .EducationHistory--Degree {
   font-weight: 600;
-  color: var(--u-color-metric-light);
+  color: var(--u-color-metric-dark);
 }
 .EducationHistory--Year {
   float: right;
   color: var(--u-color-metric-dark);
+  background-color: white;
+  border-radius: 52px;
+  border: 2px solid var(--u-color-metric-dark);
+  font-size: 0.8rem;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.Curve--title {
+  color: white;
+  margin-bottom: 11px;
+  font-weight: 300;
+  font-size: 1rem;
+  text-transform: none;
+}
+.Curve--label {
+  color: var(--u-color-metric-dark);
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+.Curve--label span {
+  color: var(--u-color-metric-light);
 }
 
 .Footer {
@@ -295,7 +357,24 @@ h1 {
 }
 
 .progress-meter .text2 {
-  text-transform: uppercase;
+  font-family: var(--u-font-sans-serif);
+  /*text-transform: uppercase;*/
   font-weight: 300;
-  font-size: 0.8rem;
+  font-size: 1rem;
+
+  /*font-size: 0.8rem;*/
+}
+
+.NormalCurve--Background {
+    fill: transparent;
+    stroke: var(--u-color-metric-dark);
+    stroke-width: 2px;
+    z-index: 10;
+}
+
+.NormalCurve--Foreground {
+    fill: var(--u-color-metric-light);
+    /*stroke: var(--u-color-metric-dark);*/
+    stroke-width: 2px;
+    z-index: 5;
 }

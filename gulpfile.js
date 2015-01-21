@@ -32,6 +32,7 @@ var paths = {
 };
 paths.static = [
   join(paths.src, '**/*'),
+  'node_modules/d3/d3.js',
   join('!', paths.src, '**/*.css'),
   join('!', paths.src, '**/*.js'),
   join('!', paths.src, '**/*.coffee')

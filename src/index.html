@@ -7,7 +7,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="d3.js"></script>
     <script>
     $(function() {
       $( "#js-tabs" ).tabs();
@@ -75,7 +75,7 @@
           </nav>
 
           <nav class="Nav--Nav-Vertical">
-            <span>Favorites</span>
+            <span>Favorite Consultants</span>
             <ul>
               <li>
                 <img class="Avatar-small" src="img/avatar-bert.jpg">
@@ -191,41 +191,46 @@
 
           <div class="Grid-cell u-size1of4">
             <div class="Metric">
-              <div class="EducationHistory">
-                <div class="EducationHistory--Year">
-                  2012
+              <div class="Grid Grid--alignCenter">
+                <div class="Grid-cell u-size1of5">
+                  <div class="EducationHistory--Year">
+                    2012
+                  </div>
                 </div>
-                <div class="EducationHistory--Degree">
-                  Ph.D. — Statistics
+                <div class="Grid-cell u-size4of5">
+                  <div class="EducationHistory">
+                    <div class="EducationHistory--Degree">
+                      Ph.D. — Statistics
+                    </div>
+                    <div class="EducationHistory--School">
+                      Stanford
+                    </div>
+                  </div>
                 </div>
-                <div class="EducationHistory--School">
-                  Stanford
+                <div class="Grid-cell u-size1of5">
+                  <div class="EducationHistory--Year">
+                    2007
+                  </div>
                 </div>
-              </div>
-              <div class="EducationHistory">
-                <div class="EducationHistory--Year">
-                  2007
-                </div>
-                <div class="EducationHistory--Degree">
-                  MBA
-                </div>
-                <div class="EducationHistory--School">
-                  Harvard Business School
+                <div class="Grid-cell u-size4of5">
+                  <div class="EducationHistory">
+                    <div class="EducationHistory--Degree">
+                      MBA
+                    </div>
+                    <div class="EducationHistory--School">
+                      Harvard Business School
+                    </div>
+                  </div>
                 </div>
               </div>
 
             </div>
           </div>
           <div class="Grid-cell u-size1of4">
-            <div class="Metric">
-              <div class="Metric--value">
-                7.2
-              </div>
-              <div class="Metric--track">
-                <div class="Metric--line" style="width: 72%"></div>
-              </div>
-              <div class="Metric--label">
-                Hillgate rating normal curve
+            <div id="Ratings" class="Metric">
+              <div class="Curve--label">
+                <div class="Curve--title">Employer Rating</div>
+                Rated top <span>4.7%</span> over <span>7</span> cases
               </div>
             </div>
           </div>
@@ -444,8 +449,9 @@
       </div> <!-- u-size4of5 -->
     <script src='js/app.js'></script>
 
-<script>
 
+{{!--  D3 Meter for OverallScore --}}
+<script>
 
 var width = 100,
     height = 100,
@@ -509,6 +515,124 @@ setTimeout(function () {
 }, 500);
 
 </script>
+
+{{!--  Normal Curve for Ratings for OverallScore --}}
+<script type="text/javascript">
+//setting up empty data array
+var backgroundData = [];
+var foregroundData = [];
+
+getData(); // populate data
+
+// line chart based on http://bl.ocks.org/mbostock/3883245
+var margin = {
+        top: 10,
+        right: 15,
+        bottom: 60,
+        left: 15
+    },
+    width = $('#Ratings').width() - margin.left - margin.right,
+    height = $('#Ratings').height() - margin.top - margin.bottom;
+
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var line = d3.svg.line()
+    .x(function(d) {
+        return x(d.q);
+    })
+    .y(function(d) {
+        return y(d.p);
+    });
+
+var area = d3.svg.area()
+  .x(function(d) {
+      return x(d.q);
+  })
+  .y0(height)
+  .y1(function(d) {
+      return y(d.p);
+  });
+
+var svg = d3.select("#Ratings").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+x.domain(d3.extent(backgroundData, function(d) {
+    return d.q;
+}));
+y.domain(d3.extent(backgroundData, function(d) {
+    return d.p;
+}));
+
+svg.append("path")
+    .datum(foregroundData)
+    .attr("class", "NormalCurve--Foreground")
+    .attr("d", area);
+
+svg.append("path")
+    .datum(backgroundData)
+    .attr("class", "NormalCurve--Background")
+    .attr("d", line);
+
+
+
+
+
+function getData() {
+
+// loop to populate data array with
+// probabily - quantile pairs
+for (var i = 0; i < 10000; i++) {
+    q = normal() // calc random draw from normal dist
+    p = gaussian(q) // calc prob of rand draw
+    el = {
+        "q": q,
+        "p": p
+    }
+    backgroundData.push(el)
+};
+
+// need to sort for plotting
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+backgroundData.sort(function(x, y) {
+    return x.q - y.q;
+});
+foregroundData = backgroundData.slice(0,9000);
+}
+
+// from http://bl.ocks.org/mbostock/4349187
+// Sample from a normal distribution with mean 0, stddev 1.
+function normal() {
+    var x = 0,
+        y = 0,
+        rds, c;
+    do {
+        x = Math.random() * 2 - 1;
+        y = Math.random() * 2 - 1;
+        rds = x * x + y * y;
+    } while (rds == 0 || rds > 1);
+    c = Math.sqrt(-2 * Math.log(rds) / rds); // Box-Muller transform
+    return x * c; // throw away extra sample y * c
+}
+
+//taken from Jason Davies science library
+// https://github.com/jasondavies/science.js/
+function gaussian(x) {
+	var gaussianConstant = 1 / Math.sqrt(2 * Math.PI),
+		mean = 0,
+    	sigma = 1;
+
+    x = (x - mean) / sigma;
+    return gaussianConstant * Math.exp(-.5 * x * x) / sigma;
+};
+</script>
+
 
   </body>
 </html>
