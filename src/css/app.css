@@ -80,7 +80,7 @@ h1 {
 .UserSelect {
   float: right;
   margin-left: 1em;
-  padding: 14px 13px 10px 15px;
+  padding: 10px 9px 10px 11px;
   height: 60px;
   border-left: 1px solid var(--u-color-metric-dark);
   background-color: var(--u-color-metric-dark);
@@ -112,10 +112,9 @@ h1 {
   border: 3px solid var(--u-color-metric-dark);
 }
 .Avatar-small {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
   border-radius: 100%;
-  border: 1px solid var(--u-color-metric-dark);
 }
 .UserHeaderText {
   padding-top: 8px;
