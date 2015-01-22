@@ -7,19 +7,38 @@
 @import "suitcss-utils-size";
 
 :root {
+
   --u-color-white: #fff;
-  --u-color-not-white: #f7f7f7;
-  --u-color-light-grey: rgb(215, 215, 215);
-  --u-color-base-text: rgb(85, 85, 85);
-  --u-color-brand: rgb(66, 93, 135);
-  --u-color-metric: #737DA3;
-  --u-color-metric-light: #ACB4DC;
-  --u-color-metric-dark: #454C63;
+
+  --u-color-gray-darker: #222;
+  --u-color-gray-dark: #333;
+  --u-color-gray: #555;
+  --u-color-gray-light: #999;
+  --u-color-gray-lighter: #f7f7f7;
+
+  --u-color-blue-darker: #333;
+  --u-color-blue-dark: #2D4051;
+  --u-color-blue: #264b6b;
+  --u-color-blue-light: #4a6985;
+  --u-color-blue-lighter: #ACB4DC;
+
+  --u-color-success: #C69FAE;
+  --u-color-success-dark: #C69FAE;
+  --u-color-warning: #C69FAE;
+  --u-color-warning-dark: #C69FAE;
   --u-color-danger: #C69FAE;
+  --u-color-danger-dark: #C69FAE;
+
+  --u-color-brand: var(--u-color-blue);
+  --u-color-metric-light: var(--u-color-blue-lighter);
+  --u-color-metric: var(--u-color-blue-light);
+  --u-color-metric-dark: var(--u-color-blue-dark);
+
+
+  --u-color-base-text: var(--u-color-gray);
 
   --u-font-sans-serif: Concourse;
   --u-font-serif: Equity;
-  --Excerpt-highlight-color: orange;
 }
 
 * {
@@ -47,7 +66,7 @@ h1 {
   margin-right: auto;
 }
 .u-light {
-  background-color: var(--u-color-not-white);
+  background-color: var(--u-color-gray-lighter);
 }
 .u-dark {
   background-color: var(--u-color-metric);
@@ -68,15 +87,15 @@ h1 {
 }
 
 .AppHeader {
-  background-color: var(--u-color-not-white);
-  border-bottom: 1px solid var(--u-color-light-grey);
+  background-color: var(--u-color-gray-lighter);
+  border-bottom: 1px solid var(--u-color-gray-light);
 }
 .Breadcrumb {
   float: left;
   margin-right: 1em;
   padding: 1.2em;
   height: 60px;
-  border-right: 1px solid var(--u-color-light-grey);
+  border-right: 1px solid var(--u-color-gray-light);
 }
 .UserSelect {
   float: right;
@@ -149,7 +168,7 @@ h1 {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 0.8rem;
-  color: var(--u-color-metric);
+  color: var(--u-color-metric-light);
   padding: 1em;
 }
 .Nav--Nav-Vertical li {
@@ -274,7 +293,7 @@ h1 {
 .EducationHistory {
   position: relative;
   margin: 0 0 1em 0.75em;
-  background-color: var(--u-color-not-white);
+  background-color: var(--u-color-gray-lighter);
   padding: 8px;
   border: 2px solid var(--u-color-metric-dark);
 }
@@ -304,7 +323,7 @@ h1 {
 .EducationHistory:after {
   left: -8px;
   top: 5px;
-  border-right-color: var(--u-color-not-white);
+  border-right-color: var(--u-color-gray-lighter);
   border-width: 10px;
 }
 
@@ -356,7 +375,7 @@ h1 {
 }
 
 .Footer {
-  background-color: var(--u-color-not-white);
+  background-color: var(--u-color-gray-lighter);
   padding: 1.5em;
 }
 .Footer li {
