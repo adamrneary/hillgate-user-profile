@@ -174,12 +174,14 @@
         <div class="Grid Grid--alignCenter">
 
           <div class="Grid-cell u-size1of4">
-            <div id="OverallScore" class="Metric"></div>
+            <div id="OverallScore" class="Metric">
+              <div class="Metric--title">Overall Score</div>
+            </div>
           </div>
 
           <div class="Grid-cell u-size1of4">
             <div id="CategoryScores" class="Metric">
-
+              <div class="Metric--title">Score Breakdown</div>
               <div class="Grid Grid--alignCenter">
                 <div class="Grid-cell u-size1of2">
                   <div class="Metric--barLabels">Experience</div>
@@ -203,6 +205,7 @@
 
           <div class="Grid-cell u-size1of4">
             <div class="Metric">
+              <div class="Metric--title">Education</div>
               <div class="Grid Grid--alignCenter">
                 <div class="Grid-cell u-size1of5">
                   <div class="EducationHistory--Year">
@@ -238,43 +241,49 @@
 
             </div>
           </div>
+
           <div class="Grid-cell u-size1of4">
             <div id="Ratings" class="Metric">
+              <div class="Metric--title">Employer Rating</div>
               <div class="Curve--label">
-                <div class="Curve--title">Employer Rating</div>
-                Rated top <span>4.7%</span> over <span>7</span> cases
+                Rated in the top <span>4.7%</span><br />
+                over <span>7</span> cases
               </div>
             </div>
           </div>
 
-          <div class="Grid-cell u-size1of2">
-            <div id="ColumnChart" class="Metric"></div>
+          <div class="Grid-cell u-size2of4">
+            <div id="ColumnChart" class="Metric">
+              <div class="Metric--title">Trailing 12 Month Billings</div>
+            </div>
           </div>
 
           <div class="Grid-cell u-size1of4">
-            <div class="Metric">
+            <div id="BillableRate" class="Metric">
+              <div class="Metric--title">Billable rate</div>
               <div class="Metric--value">
-                7.2
+                $225
               </div>
-              <div class="Metric--track">
-                <div class="Metric--line" style="width: 72%"></div>
-              </div>
-              <div class="Metric--label">
-                Availability
+              <div class="Metric--units">
+                per hour
               </div>
             </div>
           </div>
 
           <div class="Grid-cell u-size1of4">
-            <div class="Metric">
+            <div class="Metric Metric--Danger">
+              <div class="Metric--title">Availability</div>
               <div class="Metric--value">
-                7.2
+                30
+              </div>
+              <div class="Metric--units">
+                hours per week
               </div>
               <div class="Metric--track">
-                <div class="Metric--line" style="width: 72%"></div>
+                <div class="Metric--line" style="width: 75%"></div>
               </div>
-              <div class="Metric--label">
-                Billable rate
+              <div class="Curve--label">
+                Currently <span>unavailabile</span>
               </div>
             </div>
           </div>
@@ -457,15 +466,13 @@
 <<!--  D3 Meter for OverallScore -->>
 <script>
 
-var width = 100,
-    height = 100,
-    twoPi = 2 * Math.PI,
+var twoPi = 2 * Math.PI,
     progress = 0,
     total = 100,
     formatPercent = d3.format("0.0");
 
-width = $("#OverallScore").width();
-height = $("#OverallScore").height();
+var width = $("#OverallScore").width();
+var height = $("#OverallScore").height()-30;
 
 var arc = d3.svg.arc()
     .startAngle(0)
@@ -476,10 +483,9 @@ var arc = d3.svg.arc()
 var svg = d3.select("#OverallScore").append("svg")
     .attr("width", width)
     .attr("height", height)
-
     .attr('fill', '#fff')
     .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
 var meter = svg.append("g")
     .attr("class", "progress-meter");
@@ -492,16 +498,11 @@ var foreground = meter.append("path")
     .attr("class", "foreground");
 
 var text = meter.append("text")
+    .attr("y","16")
     .attr("text-anchor", "middle");
 
+
 text.text(8.7);
-
-var text2 = meter.append("text")
-    .attr("y", 27)
-    .attr("text-anchor", "middle")
-    .attr("class", "text2");
-
-text2.text('Overall Score');
 
 var animate = function(percentage){
     var i = d3.interpolate(progress, percentage);
@@ -531,10 +532,10 @@ getData(); // populate data
 
 // line chart based on http://bl.ocks.org/mbostock/3883245
 var margin = {
-        top: 10,
-        right: 15,
-        bottom: 60,
-        left: 15
+        top: 20,
+        right: 30,
+        bottom: 90,
+        left: 30
     },
     width = $('#Ratings').width() - margin.left - margin.right,
     height = $('#Ratings').height() - margin.top - margin.bottom;
@@ -643,7 +644,7 @@ function gaussian(x) {
 <script>
 
 
-var margin = {top: 10, right: 10, bottom: 20, left: 50},
+var margin = {top: 10, right: 10, bottom: 55, left: 50},
     width = $('#ColumnChart').width() - margin.left - margin.right,
     height = $('#ColumnChart').height() - margin.top - margin.bottom;
 
@@ -694,14 +695,6 @@ svg.append("g")
 svg.append("g")
     .attr("class", "y axis")
     .call(yAxis)
-  .append("text")
-    // .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr('class','ChartTitle')
-    // .attr("dy", ".71em")
-    // .class('ChartTitle')
-    // .style("text-anchor", "end")
-    .text("Trailing 12 Month Billings");
 
 svg.selectAll(".bar")
     .data(data)
@@ -717,6 +710,51 @@ function type(d) {
   d.frequency = +d.frequency;
   return d;
 }
+
+</script>
+
+
+<!-- SPARKLINE -->
+<script>
+var margin = {
+      right: 67,
+      left: 67
+    },
+    width = $('#BillableRate').width(),
+    height = 40,
+    data = [
+      {x:1, y:125},
+      {x:2, y:175},
+      {x:3, y:155},
+      {x:4, y:200},
+      {x:5, y:245},
+      {x:6, y:225}
+    ];
+  var x = d3.scale.linear().range([0, width -  margin.left - margin.right]);
+  var y = d3.scale.linear().range([height, 0]);
+  var line = d3.svg.line()
+  //  .interpolate("basis")
+   .x(function(d) { return x(d.x); })
+   .y(function(d) { return y(d.y); });
+
+    x.domain(d3.extent(data, function(d) { return d.x; }));
+    y.domain(d3.extent(data, function(d) { return d.y; }));
+
+  var svg = d3.select('#BillableRate')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ', 4)');
+  svg.append('path')
+     .datum(data)
+     .attr('class', 'sparkline')
+     .attr('d', line);
+  svg.append('circle')
+     .attr('class', 'sparkcircle')
+     .attr('cx', x(data[5].x))
+     .attr('cy', y(data[5].y))
+     .attr('r', 4);
 
 </script>
 

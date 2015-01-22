@@ -15,6 +15,7 @@
   --u-color-metric: #737DA3;
   --u-color-metric-light: #ACB4DC;
   --u-color-metric-dark: #454C63;
+  --u-color-danger: #C69FAE;
 
   --u-font-sans-serif: Concourse;
   --u-font-serif: Equity;
@@ -209,16 +210,43 @@ h1 {
   color: var(--u-color-white);
   border-right: 1px solid var(--u-color-metric-light);
   border-bottom: 1px solid var(--u-color-metric-light);
-  padding: 1em;
-  height: 12em;
+  padding: 0.5em;
+  height: 13em;
   position: relative;
+}
+.Metric--Danger {
+  background-color: var(--u-color-danger);
+}
+.Metric--title {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  color: var(--u-color-metric-light);
+  margin-bottom: 1em;
+}
+.Metric--Danger .Metric--title{
+  color: var(--u-color-base-text)
 }
 .Metric--value {
   font-size: 4em;
+  font-weight: 100;
+  margin: 10px 0 0 3.5rem;
+  display: inline-block;
   font-family: var(--u-font-serif);
 }
+.Metric--units {
+  display: inline-block;
+  font-weight: 100;
+}
+.Metric--label {
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
 .Metric--track {
-  width: 100%;
+  width: 60%;
+  margin: 0 auto;
   height: 2px;
   background-color: var(--u-color-metric-dark);
 }
@@ -317,7 +345,14 @@ h1 {
   font-size: 0.9rem;
 }
 .Curve--label span {
-  color: var(--u-color-metric-light);
+  margin: 0 .2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--u-color-white);
+}
+.Metric--Danger .Curve--label span {
+  color: var(--u-color-metric);
+  text-decoration: underline;
 }
 
 .Footer {
@@ -402,4 +437,15 @@ h1 {
 text.ChartTitle {
   text-transform: none;
   font-size: 1rem;
+}
+
+.sparkline {
+  fill: none;
+  stroke: var(--u-color-metric-light);
+  stroke-width: 2px;
+}
+.sparkcircle {
+  fill: var(--u-color-white);
+  stroke: var(--u-color-metric);
+  stroke-width: 2px;
 }
