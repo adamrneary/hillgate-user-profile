@@ -248,7 +248,7 @@
           </div>
 
           <div class="Grid-cell u-size1of2">
-            <div id="BarChart" class="Metric"></div>
+            <div id="ColumnChart" class="Metric"></div>
           </div>
 
           <div class="Grid-cell u-size1of4">
@@ -639,13 +639,13 @@ function gaussian(x) {
 </script>
 
 
-<<!-- BAR CHART -->>
+<<!-- COLUMN CHART -->>
 <script>
 
 
 var margin = {top: 10, right: 10, bottom: 20, left: 50},
-    width = $('#BarChart').width() - margin.left - margin.right,
-    height = $('#BarChart').height() - margin.top - margin.bottom;
+    width = $('#ColumnChart').width() - margin.left - margin.right,
+    height = $('#ColumnChart').height() - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
@@ -662,7 +662,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(5, "$,0");
 
-var svg = d3.select("#BarChart").append("svg")
+var svg = d3.select("#ColumnChart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
