@@ -378,3 +378,28 @@ h1 {
     stroke-width: 2px;
     z-index: 5;
 }
+
+.bar {
+  fill: var(--u-color-metric-dark);
+}
+.bar:hover {
+  fill: var(--u-color-metric-light);
+}
+.axis {
+  font: 0.8rem var(--u-font-sans-serif);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.axis path, .axis line {
+  display: none;
+}
+.axis text {
+  fill: var(--u-color-white);
+}
+.x.axis path {
+  display: none;
+}
+text.ChartTitle {
+  text-transform: none;
+  font-size: 1rem;
+}
